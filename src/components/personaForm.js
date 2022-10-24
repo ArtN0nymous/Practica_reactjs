@@ -13,6 +13,11 @@ export const PersonaForm=(props)=>{
         e.preventDefault();
         props.savePerson(state);
     }
+    function limpiar(e){
+        e.preventDefault();
+        setState({...state,nombre:'',apellido:'',
+        desc:''});
+    }
     return(
         <>
             <div className="alert alert-success alertaOff" role="alert">Usuario guardado !</div>
@@ -21,17 +26,17 @@ export const PersonaForm=(props)=>{
                     <div className="input-group-text bg-light">
                         <i className="material-icons">person</i>
                     </div>
-                    <input type="text" className="form-control" placeholder="Nombre" name="nombre" onChange={(value)=>handleChangeText('nombre',value)}/>
+                    <input type="text" className="form-control" placeholder="Nombre" name="nombre" onChange={(value)=>handleChangeText('nombre',value)} required value={state.nombre}/>
                 </div>
                 <div className="form-group input-group">
                     <div className="input-group-text bg-light">
                         <i className="material-icons">format_align_justify</i>
                     </div>
-                    <input type="text" className="form-control" placeholder="Apellido" name="apellido" onChange={(value)=>handleChangeText('apellido',value)}></input>
+                    <input type="text" className="form-control" placeholder="Apellido" name="apellido" onChange={(value)=>handleChangeText('apellido',value)} required value={state.apellido}></input>
                 </div>
-                <textarea name="desc" rows="4" className="form-control" placeholder="Descripción" onChange={(value)=>handleChangeText('desc',value)}></textarea>
+                <textarea name="desc" rows="4" className="form-control" placeholder="Descripción" onChange={(value)=>handleChangeText('desc',value)} required value={state.desc}></textarea>
                 <div className="btn-group btn-group-lg">
-                    <button className="btn btn-warning">Limpiar</button>
+                    <button className="btn btn-warning" onClick={(e)=>limpiar(e)}>Limpiar</button>
                     <button className="btn btn-success">Guardar</button>
                 </div>
             </form>
