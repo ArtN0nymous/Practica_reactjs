@@ -42,12 +42,23 @@ function App() {
       console.log(error.code+' '+error.message);
     });
   }
+  const actualizarPersona=(persona)=>{
+    database.db.collection('personas').doc(persona.id).update({
+      nombre:persona.nombre,
+      apellido:persona.apellido,
+      desc:persona.desc
+    }).then((result)=>{
+      console.log('Actualizado');
+    }).catch((error)=>{
+      console.log(error.code+' '+error.message);
+    });
+  }
   return (
     <>
       <div className='container p-4'>
         <div className="row">
           <PersonaForm savePerson={savePerson}/>
-          <PersonasList leerPersonas={()=>leerPersonas()} personas={personas} eliminar={eliminarPersona}/>
+          <PersonasList leerPersonas={()=>leerPersonas()} personas={personas} eliminar={eliminarPersona} actualizar={actualizarPersona}/>
         </div>
       </div>
     </>
